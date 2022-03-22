@@ -31,5 +31,11 @@ function operate(operator, num1, num2) {
         default:
             alert("Wrong input!");
             operate(operator, num1, num2);
-    }
+    };
+};
+
+function clear() {
+    document.querySelector('.display').textContent = "00";
 }
+
+document.getElementById('clear').addEventListener('click', clear);
