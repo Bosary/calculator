@@ -38,4 +38,16 @@ function clear() {
     document.querySelector('.display').textContent = "00";
 }
 
+function display(e) {
+    let currentContent = document.querySelector('.display').textContent;
+    if (currentContent == '00') currentContent = "";
+    document.querySelector('.display').textContent = `${currentContent}${e.target.textContent}`;
+}
+
 document.getElementById('clear').addEventListener('click', clear);
+
+const digits = document.querySelector('.digits');
+digits.addEventListener('click', display);
+
+const operators = document.querySelector('.operators');
+operators.addEventListener('click', display);
