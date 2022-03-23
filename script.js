@@ -51,3 +51,5 @@ digits.addEventListener('click', display);
 
 const operators = document.querySelector('.operators');
 operators.addEventListener('click', display);
+
+// EQUAL

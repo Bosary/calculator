@@ -4,6 +4,12 @@
     width: 252px;
 }
 
+.over-display {
+    text-align: end;
+    width: 252px;
+    font-size: 16px;
+}
+
 .display {
     text-align: end;
     width: 252px;
@@ -39,14 +45,15 @@
     height: 30px;
 }
 
-.clear {
+.other {
     padding: 8px;
     width: 252px;
     text-align: center;
 }
 
-.clear > button {
+.other > button {
     text-align: center;
     font-size: 16px;
-    padding: 0 16px;
+    width: 96px;
+    margin: 0 8px;
 }
