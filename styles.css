@@ -4,7 +4,7 @@
     width: 252px;
 }
 
-.over-display {
+.top-display {
     text-align: end;
     width: 252px;
     font-size: 16px;
@@ -46,13 +46,13 @@
     height: 30px;
 }
 
-.other {
+.others {
     padding: 8px;
     width: 252px;
     text-align: center;
 }
 
-.other > button {
+.others > button {
     text-align: center;
     font-size: 16px;
     width: 96px;
