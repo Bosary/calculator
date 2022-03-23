@@ -40,22 +40,48 @@ function clear() {
 }
 
 // Change display after every change number/operator
-function displayMain(e) {
-    document.querySelector('.display').textContent = `${e.target.textContent}`;    
+function displayMain(oldEntry, newEntry) {
+    
+    document.querySelector('.display').textContent = `${oldEntry}${newEntry}`;
 }
 
 // Display the whole operation
-function displayTop(e) {
-    let currentContent = document.querySelector('.over-display').textContent;
-    if (currentContent == '00') currentContent = "";
-    document.querySelector('.over-display').textContent = `${currentContent}${e.target.textContent}`;
+function displayTop(oldEntry, newEntry) {
+
+    document.querySelector('.over-display').textContent = `${oldEntry}${newEntry}`;    
+}
+
+function checkUserInput(e) {
+    const currentDisplay = document.querySelector('.display');
+    const overDisplay = document.querySelector('.over-display')
+    
+    // Numbers input
+    switch (e.currentTarget.className == 'digits') {
+        case (currentDisplay.textContent == "00"):
+            displayMain("",e.target.textContent);
+            displayTop("",e.target.textContent);
+            break;
+        
+        case (parseFloat(currentDisplay.textContent) != NaN):
+            displayMain(currentDisplay.textContent, e.target.textContent);
+            displayTop(overDisplay.textContent, e.target.textContent);
+            break;
+        
+        case (parseFloat(currentDisplay.textContent) == NaN):
+            displayMain("",e.target.textContent);
+            displayTop(overDisplay, e.target.textContent);
+            break;
+
+        default:
+            console.log("Error");
+    }
+
 }
 
 document.getElementById('clear').addEventListener('click', clear);
 
 const digits = document.querySelector('.digits');
-digits.addEventListener('click', displayMain);
-digits.addEventListener('click', displayTop);
+digits.addEventListener('click', checkUserInput);
 
 const operators = document.querySelector('.operators');
 operators.addEventListener('click', displayMain);

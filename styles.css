@@ -12,6 +12,7 @@
 
 .display {
     text-align: end;
+    height: 40px;
     width: 252px;
     font-size: 32px;
 }
