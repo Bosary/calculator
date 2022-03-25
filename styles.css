@@ -18,14 +18,14 @@ body {
     padding: 16px;
 }
 
-div#main {
+div#main-display {
     text-align: end;
     text-emphasis: 700;
     font-size: 48px;
     color: white;
 }
 
-div#lower {
+div#lower-display {
     text-align: end;
     font-size: 32px;
     font-weight: 600;
