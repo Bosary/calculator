@@ -16,6 +16,7 @@ body {
     flex-direction: column;
     flex-wrap: wrap;
     padding: 16px;
+    height: 96px;
 }
 
 div#main-display {
