@@ -1,60 +1,58 @@
-.calculator {
-    display: flex;
-    flex-wrap: wrap;
-    width: 252px;
+body {
+    box-sizing: border-box;
 }
 
-.top-display {
-    text-align: end;
-    width: 252px;
-    font-size: 16px;
+.calculator {
+    background-color: black;
+    display: flex;
+    flex-wrap: wrap;
+    width: 320px;
+    flex-direction: column;
+    margin: 16px;
 }
 
 .display {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    padding: 16px;
+}
+
+div#main {
     text-align: end;
-    height: 40px;
-    width: 252px;
+    text-emphasis: 700;
+    font-size: 48px;
+    color: white;
+}
+
+div#lower {
+    text-align: end;
     font-size: 32px;
+    font-weight: 600;
+    color: gray;
 }
-.digits {
+
+.controls {
     display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    justify-content: space-evenly;
-    padding: 8px 0;
-    width: 126px;
+    flex-direction: column;
+    font-size: 0;
 }
 
-.digits > button {
-    font-size: 16px;
-    width: 30px;
-    height: 30px;
+.row {
+    width: 320px;
 }
 
-.operators {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    justify-content: space-evenly;
-    width: 126px;
-    padding: 8px 0;
+.row > button {
+    background-color: black;
+    color: white;
+    font-size: 24px;
+    font-weight: 600;
+    width: 80px;
+    height: 60px;
 }
 
-.operators > button {
-    font-size: 16px;
-    width: 40px;
-    height: 30px;
+.row > button:last-child,
+#first-row > button {
+    color: cyan;
 }
 
-.others {
-    padding: 8px;
-    width: 252px;
-    text-align: center;
-}
-
-.others > button {
-    text-align: center;
-    font-size: 16px;
-    width: 96px;
-    margin: 0 8px;
-}
