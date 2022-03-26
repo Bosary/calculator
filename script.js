@@ -113,6 +113,10 @@ function display(button) {
         lowerDisplay.textContent = operate()
     }
 
+    // adjust font
+    if (mainDisplay.textContent.length < 12) {
+        mainDisplay.setAttribute('style', 'font-size: 48px');
+    }
     if (mainDisplay.textContent.length > 11) {
         mainDisplay.setAttribute('style', 'font-size: 24px');
     }
