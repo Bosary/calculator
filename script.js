@@ -7,7 +7,7 @@ function checkButton(e) {
     button = e.target.textContent;
 
     // special action
-    if (button == 'C') { return clear() };
+    if (button == 'Clear') { return clear() };
 
     if (button == '⌫') { return deleteInput() };
 
