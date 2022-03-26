@@ -9,7 +9,7 @@ function checkButton(e) {
     // special action
     if (button == 'C') { return clear() };
 
-    //if (button == '⌫') { return }
+    if (button == '⌫') { return deleteInput() };
 
     if (button == '.') { return addDecimal(e) };
 
@@ -34,6 +34,43 @@ function clear() {
     num1 = null;
     num2 = null;
     operator = null;
+}
+
+function calculatePercentage() {
+
+}
+
+function deleteInput() {
+
+    // Update display
+    const mainDisplay = document.getElementById('main-display');
+    if (mainDisplay.textContent != "") {
+        const editedMain = mainDisplay.textContent.slice(0, -1);
+        mainDisplay.textContent = editedMain;
+    }
+    
+    // Check in order num2 - operator - num1 and edit the value
+    if (num2) {
+        num2 = num2.slice(0, -1);
+        if (num2 == "") {
+            num2 = null;
+        }
+    } else if (operator) {
+        operator = null;
+    } else if (num1) {
+        num1 = num1.slice(0, -1);
+        if (num1 == "") {
+            num1 = null;
+        }
+    } 
+
+    // Update lower display
+    const lowerDisplay = document.getElementById('lower-display');
+    if (num2) {
+        lowerDisplay.textContent = operate();
+    } else {
+        lowerDisplay.textContent = "";
+    }
 }
 
 function getNumbers(button) {
