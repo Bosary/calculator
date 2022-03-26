@@ -17,30 +17,30 @@ body {
     flex-wrap: wrap;
     padding: 16px;
     height: 96px;
+    word-break: break-word;
+    align-items: flex-end;
 }
 
 div#main-display {
-    text-align: end;
+    vertical-align: middle;
     text-emphasis: 700;
     font-size: 48px;
     color: white;
+    height: 48px;
 }
 
 div#lower-display {
-    text-align: end;
+    vertical-align: middle;
     font-size: 32px;
     font-weight: 600;
     color: gray;
+    height: 48px;
 }
 
 .controls {
     display: flex;
     flex-direction: column;
     font-size: 0;
-}
-
-.row {
-    width: 320px;
 }
 
 .row > button {
