@@ -1,6 +1,7 @@
 let num1 = null;
 let num2 = null;
 let operator = null;
+let newOperation = true;
 
 function checkButton(e) {
     
@@ -34,10 +35,7 @@ function clear() {
     num1 = null;
     num2 = null;
     operator = null;
-}
-
-function calculatePercentage() {
-
+    newOperation = true;
 }
 
 function deleteInput() {
@@ -74,9 +72,17 @@ function deleteInput() {
 }
 
 function getNumbers(button) {
-    
-    if (!operator) {
-        if (num1 === null) {
+
+    // start a new operation
+    if (newOperation) {
+        clear();
+        num1 = button;
+        newOperation = false;
+        return;
+    }
+
+    if (!operator && !newOperation) {
+        if (num1 === null) { // in case user delete 1st number
             num1 = button;
         } else {
             num1 += button;
@@ -91,6 +97,7 @@ function getNumbers(button) {
 }
 
 function getOperator(button) {
+    newOperation = false;
     // operation with several operators
     if (operator && num2) {
         const partialResult = document.getElementById('lower-display').textContent; 
@@ -152,7 +159,11 @@ function showResult() {
         lowerDisplay.textContent = 'Missing operand';
     } else {
         mainDisplay.textContent = lowerDisplay.textContent;
-        lowerDisplay.textContent = ""; 
+        lowerDisplay.textContent = "";
+        num1 = mainDisplay.textContent; 
+        operator = null;
+        num2 = null;
+        newOperation = true;
     }
 }
 function operate() {
