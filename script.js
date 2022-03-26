@@ -1,13 +1,25 @@
+/* Calculator Project.
+Note 26/03/22: Consider revisiting later, using array to stock input 
+to see if it can make the code easier
+Also change deleteInput. Updating display should be done in display.
+Need to add an updateDisplay() ?
+*/
+
+
+// globals
 let num1 = null;
 let num2 = null;
-let operator = null;
+let operator = null; // null => working on num1; otherwise num2
 let newOperation = true;
 
+const controls = document.querySelector('.controls');
+controls.addEventListener('click', checkButton);
+
+
 function checkButton(e) {
-    
     button = e.target.textContent;
 
-    // special action
+    // special actions. Exit current function on use.
     if (button == 'Clear') { return clear() };
 
     if (button == '⌫') { return deleteInput() };
@@ -16,7 +28,7 @@ function checkButton(e) {
 
     if (button == '=') { return showResult() };
 
-    // Digits and operators
+    // digits and operators
     if (!isNaN(+button)) {
         getNumbers(button);
     } else {
@@ -26,7 +38,8 @@ function checkButton(e) {
     display(e);
 }
 
-function clear() {
+
+function clear() { // full reset
     const mainDisplay = document.getElementById('main-display');
     const lowerDisplay = document.getElementById('lower-display');
 
@@ -38,8 +51,8 @@ function clear() {
     newOperation = true;
 }
 
-function deleteInput() {
 
+function deleteInput() {
     // Update display
     const mainDisplay = document.getElementById('main-display');
     if (mainDisplay.textContent != "") {
@@ -71,57 +84,23 @@ function deleteInput() {
     }
 }
 
-function getNumbers(button) {
 
-    // start a new operation
-    if (newOperation) {
-        clear();
-        num1 = button;
-        newOperation = false;
-        return;
-    }
-
-    if (!operator && !newOperation) {
-        if (num1 === null) { // in case user delete 1st number
-            num1 = button;
-        } else {
-            num1 += button;
-        }
-    } else {
-        if (num2 === null) {
-            num2 = button;
-        } else {
-            num2 += button;
-        }
-    }
-}
-
-function getOperator(button) {
-    newOperation = false;
-    // operation with several operators
-    if (operator && num2) {
-        const partialResult = document.getElementById('lower-display').textContent; 
-        num1 = partialResult;
+function showResult() {
+    const mainDisplay = document.getElementById('main-display');
+    const lowerDisplay = document.getElementById('lower-display');
+    
+    if(!num2) {
+        lowerDisplay.textContent = 'Missing operand';
+    } else { 
+        mainDisplay.textContent = lowerDisplay.textContent;
+        lowerDisplay.textContent = "";
+        num1 = mainDisplay.textContent; 
+        operator = null;
         num2 = null;
-        operator = button;
-        return; // Need to exit the function to avoid issue between negative and substract
+        newOperation = true;
     }
-
-    //negative
-    if (button == '-') {
-        if (!num1) {
-            num1 = '-';
-        }
-        if (operator && !num2) {
-            num2 = '-';
-        }
-    }
-
-    // first operator
-    if (num1 && !operator) {
-        operator = button;
-    } 
 }
+
 
 function display(e) {
     const mainDisplay = document.getElementById('main-display');
@@ -137,8 +116,63 @@ function display(e) {
     }
 }
 
-function addDecimal(e) {
 
+function getNumbers(button) {
+    // start a new operation
+    if (newOperation) {
+        clear();
+        num1 = button;
+        newOperation = false;
+        return;
+    }
+
+    // Ongoing operation. 
+    if (!operator && !newOperation) {
+        if (num1 === null) { // in case user delete 1st number
+            num1 = button;
+        } else {
+            num1 += button;
+        }
+    } else {
+        if (num2 === null) {
+            num2 = button;
+        } else {
+            num2 += button;
+        }
+    }
+}
+
+
+function getOperator(button) {
+    newOperation = false;
+
+    // operation with several operators
+    if (operator && num2) {
+        const partialResult = document.getElementById('lower-display').textContent; 
+        num1 = partialResult;
+        num2 = null;
+        operator = button;
+        return; // Need to exit the function to avoid issue between negative and substract
+    }
+
+    // negative numbers
+    if (button == '-') {
+        if (!num1) {
+            num1 = '-';
+        }
+        if (operator && !num2) {
+            num2 = '-';
+        }
+    }
+
+    // first operator
+    if (num1 && !operator) {
+        operator = button;
+    } 
+}
+
+
+function addDecimal(e) {
     if (!operator && num1 !== null) {
         num1 += '.';
         display(e);
@@ -150,22 +184,7 @@ function addDecimal(e) {
     }
 }
 
-function showResult() {
 
-    const mainDisplay = document.getElementById('main-display');
-    const lowerDisplay = document.getElementById('lower-display');
-    
-    if(!num2) {
-        lowerDisplay.textContent = 'Missing operand';
-    } else {
-        mainDisplay.textContent = lowerDisplay.textContent;
-        lowerDisplay.textContent = "";
-        num1 = mainDisplay.textContent; 
-        operator = null;
-        num2 = null;
-        newOperation = true;
-    }
-}
 function operate() {
     let result = null;
 
@@ -194,7 +213,3 @@ function operate() {
     result = Math.round (result *100) / 100;
     return result;
 }
-
-const controls = document.querySelector('.controls');
-controls.addEventListener('click', checkButton);
-
