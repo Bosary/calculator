@@ -60,6 +60,7 @@ function getOperator(button) {
         num1 = partialResult;
         num2 = null;
         operator = button;
+        return; // Need to exit the function to avoid issue between negative and substract
     }
 
     //negative
