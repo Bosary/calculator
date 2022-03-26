@@ -11,8 +11,11 @@ function checkButton(e) {
 
     //if (button == '⌫') { return }
 
-    if (button == '=') {return showResult() };
-    
+    if (button == '.') { return addDecimal(e) };
+
+    if (button == '=') { return showResult() };
+
+    // Digits and operators
     if (!isNaN(+button)) {
         getNumbers(button);
     } else {
@@ -86,6 +89,19 @@ function display(e) {
     // update lower diplay.
     if (num2 !== null && num2 !== '-') {
         lowerDisplay.textContent = operate()
+    }
+}
+
+function addDecimal(e) {
+
+    if (!operator && num1 !== null) {
+        num1 += '.';
+        display(e);
+    } 
+    
+    if (operator && num2 !== null) {
+        num2 += '.';
+        display(e);
     }
 }
 
