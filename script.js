@@ -114,6 +114,10 @@ function display(e) {
     if (num2 !== null && num2 !== '-') {
         lowerDisplay.textContent = operate()
     }
+
+    if (mainDisplay.textContent.length > 11) {
+        mainDisplay.setAttribute('style', 'font-size: 24px');
+    }
 }
 
 
