@@ -24,7 +24,7 @@ function checkButton(e) {
 
     if (button == '⌫') { return deleteInput() };
 
-    if (button == '.') { return addDecimal(e) };
+    if (button == '.') { return addDecimal(button) };
 
     if (button == '=') { return showResult() };
 
@@ -34,8 +34,6 @@ function checkButton(e) {
     } else {
         getOperator(button);
     }   
-
-    display(e);
 }
 
 
@@ -102,10 +100,10 @@ function showResult() {
 }
 
 
-function display(e) {
+function display(button) {
     const mainDisplay = document.getElementById('main-display');
     const lowerDisplay = document.getElementById('lower-display');
-    const button = e.target.textContent;
+    // const button = e.target.textContent;
 
     // update main display
     mainDisplay.textContent += button;
@@ -122,14 +120,6 @@ function display(e) {
 
 
 function getNumbers(button) {
-    // start a new operation
-    if (newOperation) {
-        clear();
-        num1 = button;
-        newOperation = false;
-        return;
-    }
-
     // Ongoing operation. 
     if (!operator && !newOperation) {
         if (num1 === null) { // in case user delete 1st number
@@ -144,48 +134,63 @@ function getNumbers(button) {
             num2 += button;
         }
     }
+
+    // start a new operation
+    if (newOperation) {
+        clear();
+        num1 = button;
+        newOperation = false;
+    }
+
+    display(button);
 }
 
 
 function getOperator(button) {
+    // Need to keep display in the loop to avoid user entering several
+    // operators in a row (except for negative number)
+
     newOperation = false;
 
-    // operation with several operators
-    if (operator && num2) {
+    if (num1 && num1 != '-' && !operator) {
+        operator = button;
+        display(button);
+        return;
+    } 
+    // operation with several operator
+    else if (operator && num2 && num2 != '-') { 
         const partialResult = document.getElementById('lower-display').textContent; 
         num1 = partialResult;
         num2 = null;
         operator = button;
-        return; // Need to exit the function to avoid issue between negative and substract
+        display(button);
+        return;
     }
-
+  
     // negative numbers
     if (button == '-') {
         if (!num1) {
             num1 = '-';
+            display(button);
         }
         if (operator && !num2) {
             num2 = '-';
-        }
+            display(button);
+        }   
     }
-
-    // first operator
-    if (num1 && !operator) {
-        operator = button;
-    } 
 }
 
 
-function addDecimal(e) {
+function addDecimal(button) {
     if (!operator && num1 !== null) {
         num1 += '.';
-        display(e);
     } 
     
     if (operator && num2 !== null) {
         num2 += '.';
-        display(e);
     }
+
+    display(button);
 }
 
 
