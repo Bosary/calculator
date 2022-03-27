@@ -87,6 +87,17 @@ function showResult() {
     const mainDisplay = document.getElementById('main-display');
     const lowerDisplay = document.getElementById('lower-display');
     
+    if (lowerDisplay.textContent == "" || lowerDisplay.textContent == 'Missing operand') {
+        lowerDisplay.textContent = 'Missing operand';
+    } else {
+        mainDisplay.textContent = lowerDisplay.textContent;
+        lowerDisplay.textContent = "";
+        num1 = mainDisplay.textContent; 
+        operator = null;
+        num2 = null;
+        newOperation = true;
+    }
+    /*
     if(!num2) {
         lowerDisplay.textContent = 'Missing operand';
     } else { 
@@ -96,7 +107,7 @@ function showResult() {
         operator = null;
         num2 = null;
         newOperation = true;
-    }
+    } */
 }
 
 
