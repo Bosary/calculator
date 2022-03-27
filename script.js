@@ -194,7 +194,7 @@ function addDecimal(button) {
     
     if (operator && !num2) {
         num2 = '0.';
-    } else if (operator && !num2) {
+    } else if (operator && num2) {
         num2 += '.';
     }
 
