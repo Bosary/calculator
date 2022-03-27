@@ -186,14 +186,19 @@ function getOperator(button) {
 
 
 function addDecimal(button) {
-    if (!operator && num1 !== null) {
+    if (!operator && !num1) {
+        num1 = '0.';
+    } else if (!operator) {
         num1 += '.';
-    } 
+    }
     
-    if (operator && num2 !== null) {
+    if (operator && !num2) {
+        num2 = '0.';
+    } else if (operator && !num2) {
         num2 += '.';
     }
 
+    newOperation = false;
     display(button);
 }
 
